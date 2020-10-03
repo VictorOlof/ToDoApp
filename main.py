@@ -2,6 +2,9 @@ class TodoList:
     def __init__(self):
         self.todo_list = []  # store all task objects
 
+    def __repr__(self):
+        return '{self.__class__.__name__}({self.todo_list})'.format(self=self)
+
     def add_task(self, task):
         # put task object in todo_list
         self.todo_list.append(task)
@@ -16,6 +19,9 @@ class Task:
     def __init__(self, task_name):
         self.task_name = task_name.capitalize()  # Name of task
         self.completed = False  # If task is done
+
+    def __repr__(self):
+        return '{self.__class__.__name__}({self.task_name}, {self.completed}'.format(self=self)
 
 
 def main():
