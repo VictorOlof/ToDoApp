@@ -17,9 +17,9 @@ class ListInterface:
             else:
                 print(project.name)
 
+            # show tasks below project name
             if show_task_list:
-                for task in project.task_list:
-                    print(f"  {task.name}")
+                project.view_all_tasks()
     
 
 class Project:
@@ -50,6 +50,12 @@ class Task:
 
     def __repr__(self):
         return '{self.__class__.__name__}({self.name}, {self.completed}'.format(self=self)
+
+    def set_completed(self):
+        if self.completed:
+            self.completed = False
+        else:
+            self.completed = True
 
 
 def main():
@@ -82,6 +88,10 @@ def main():
 
             if value == "1":  # Add task
                 selected_project.add_task()
+            if value == "2":  # Mark task
+                selected_task_value = int(input("Select the task you want to use: "))
+                selected_task = selected_project.task_list[selected_task_value-1]
+                selected_task.set_completed()  # Set completed to true or false
         elif value == "3":  # Quit application
             break
 
