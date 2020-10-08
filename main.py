@@ -19,7 +19,10 @@ class ListInterface:
 
             # show tasks below project name
             if show_task_list:
-                project.view_all_tasks()
+                if not project.task_list:
+                    print(" -empty-")
+                else:
+                    project.view_all_tasks()
     
 
 class Project:
@@ -31,9 +34,12 @@ class Project:
         return '{self.__class__.__name__}({self.name}, {self.task_list})'.format(self=self)
 
     def add_task(self):
-        name = input("Enter task name: ")
-        task = Task(name)
-        self.task_list.append(task)
+        while True:
+            name = input("Task name (leave blank to stop): ")
+            if name == "":
+                break
+            task = Task(name)
+            self.task_list.append(task)
 
     def view_all_tasks(self, show_numbers=False):
         for i, task in enumerate(self.task_list):
@@ -64,34 +70,36 @@ def main():
 
     while True:
         li.view_all_lists()
+        print()
 
-        print("1. Add project")
-        print("2. Select project")
-        print("3. Quit application")
-        value = input("Select: ")
+        print("1. Add project | 2. Select project | 3. Quit")
+        value = input("Select option: ")
 
         if value == "1":  # Add project
             li.add_project()
         elif value == "2":  # Select project
             li.view_all_lists(show_numbers=True, show_task_list=False)
 
-            selected_project_value = int(input("Select the project you want to use: "))
+            selected_project_value = int(input("Select project: "))
             selected_project = li.project_lists[selected_project_value-1]
-            print(f"You are working with the project:")
-            print(selected_project.name)
-            selected_project.view_all_tasks(show_numbers=True)
-            print()
 
-            print("1. Add task")
-            print("2. Mark task")
-            value = input("Selected option: ")
+            while True:
+                print(f"You are working with the project:")
+                print(selected_project.name)
+                selected_project.view_all_tasks(show_numbers=True)
+                print()
 
-            if value == "1":  # Add task
-                selected_project.add_task()
-            if value == "2":  # Mark task
-                selected_task_value = int(input("Select the task you want to use: "))
-                selected_task = selected_project.task_list[selected_task_value-1]
-                selected_task.set_completed()  # Set completed to true or false
+                print("1. Add task | 2. Mark task")
+                value = input("Select option (leave blank to stop): ")
+                if value == "":
+                    break
+
+                if value == "1":  # Add task
+                    selected_project.add_task()
+                if value == "2":  # Mark task
+                    selected_task_value = int(input("Select task: "))
+                    selected_task = selected_project.task_list[selected_task_value-1]
+                    selected_task.set_completed()  # Set completed to true or false
         elif value == "3":  # Quit application
             break
 
