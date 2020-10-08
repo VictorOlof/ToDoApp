@@ -1,3 +1,14 @@
+class Project:
+    def __init__(self):
+        self.todo_list = []
+
+    def add_list(self):
+        pass
+
+    def view_all_lists(self):
+        pass
+    
+
 class TodoList:
     def __init__(self):
         self.task_list = []  # store all task objects
