@@ -1,18 +1,18 @@
-class Project:
+class ListInterface:
     def __init__(self):
-        self.todo_list = []
+        self.project_lists = []
 
     def __repr__(self):
-        return '{self.__class__.__name__}({self.todo_list})'.format(self=self)
+        return '{self.__class__.__name__}({self.project_lists})'.format(self=self)
 
-    def add_list(self):
+    def add_project(self):
         pass
 
     def view_all_lists(self):
         pass
     
 
-class TodoList:
+class Project:
     def __init__(self, name):
         self.name = name.capitalize()
         self.task_list = []  # store all task objects
@@ -38,7 +38,7 @@ class Task:
 
 def main():
     # start of application
-    todolist = Project()
+    li = ListInterface()
 
 
 if __name__ == '__main__':
