@@ -14,7 +14,7 @@ class ListInterface:
         for project in self.project_lists:
             print(project.name)
             for task in project.task_list:
-                print(task.name)
+                print(f"  {task.name}")
     
 
 class Project:
@@ -25,11 +25,14 @@ class Project:
     def __repr__(self):
         return '{self.__class__.__name__}({self.name}, {self.task_list})'.format(self=self)
 
-    def add_task(self, task):
-        pass
+    def add_task(self):
+        name = input("Enter task name: ")
+        task = Task(name)
+        self.task_list.append(task)
 
     def view_all_tasks(self):
-        pass
+        for task in self.task_list:
+            print(f"[{'x' if task.completed else ' '}] {task.name}")
 
 
 class Task:
@@ -46,6 +49,8 @@ def main():
     li = ListInterface()
 
     while True:
+        li.view_all_lists()
+
         print("1. Add project")
         print("2. Select project")
         print("3. Quit application")
@@ -55,6 +60,17 @@ def main():
             li.add_project()
         if value == "2":  # Select project
             li.view_all_lists()
+
+            selected_project_value = int(input("Select the project you want to use: "))
+            selected_project = li.project_lists[selected_project_value]
+            print(f"You are working with the project: {selected_project.name}")
+
+            print("1. Add task")
+            print("2. Delete task")
+            value = input("Selected option: ")
+
+            if value == "1":
+                selected_project.add_task()
         if value == "3":  # Quit application
             break
 
