@@ -1,6 +1,6 @@
 class ListInterface:
     def __init__(self):
-        self.project_lists = []
+        self.project_lists = []  # stores all Project objects
 
     def __repr__(self):
         return '{self.__class__.__name__}({self.project_lists})'.format(self=self)
@@ -11,13 +11,14 @@ class ListInterface:
         self.project_lists.append(project)
 
     def view_all_lists(self, show_numbers=False, show_task_list=True):
+        # print projects name
         for i, project in enumerate(self.project_lists):
             if show_numbers:
                 print(f"{i+1}. {project.name}")
             else:
                 print(project.name)
 
-            # show tasks below project name
+            # print tasks below project name
             if show_task_list:
                 if not project.task_list:
                     print(" -empty-")
@@ -27,7 +28,7 @@ class ListInterface:
 
 class Project:
     def __init__(self, name):
-        self.name = name.capitalize()
+        self.name = name.capitalize()  # name of project
         self.task_list = []  # store all task objects
 
     def __repr__(self):
@@ -51,13 +52,14 @@ class Project:
 
 class Task:
     def __init__(self, name):
-        self.name = name.capitalize()  # Name of task
-        self.completed = False  # If task is done
+        self.name = name.capitalize()  # name of task
+        self.completed = False  # if task is done
 
     def __repr__(self):
         return '{self.__class__.__name__}({self.name}, {self.completed}'.format(self=self)
 
     def set_completed(self):
+        # set completed from True -> False or False -> True
         if self.completed:
             self.completed = False
         else:
@@ -72,9 +74,8 @@ def main():
         li.view_all_lists()
         print()
 
-        print("1. Add project | 2. Select project | 3. Quit")
+        print("1. Add project | 2. Select project | 3. Add task by date | 4. Quit")
         value = input("Select option: ")
-
         if value == "1":  # Add project
             li.add_project()
         elif value == "2":  # Select project
@@ -82,7 +83,6 @@ def main():
 
             selected_project_value = int(input("Select project: "))
             selected_project = li.project_lists[selected_project_value-1]
-
             while True:
                 print(f"You are working with the project:")
                 print(selected_project.name)
@@ -93,10 +93,9 @@ def main():
                 value = input("Select option (leave blank to stop): ")
                 if value == "":
                     break
-
-                if value == "1":  # Add task
+                elif value == "1":  # Add task
                     selected_project.add_task()
-                if value == "2":  # Mark task
+                elif value == "2":  # Mark task
                     selected_task_value = int(input("Select task: "))
                     selected_task = selected_project.task_list[selected_task_value-1]
                     selected_task.set_completed()  # Set completed to true or false
