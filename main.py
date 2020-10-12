@@ -1,69 +1,4 @@
-class ListInterface:
-    def __init__(self):
-        self.project_lists = []  # stores all Project objects
-
-    def __repr__(self):
-        return '{self.__class__.__name__}({self.project_lists})'.format(self=self)
-
-    def add_project(self):
-        name = input("Enter project name: ")
-        project = Project(name)
-        self.project_lists.append(project)
-
-    def view_all_lists(self, show_numbers=False, show_task_list=True):
-        # print projects name
-        for i, project in enumerate(self.project_lists):
-            if show_numbers:
-                print(f"{i+1}. {project.name}")
-            else:
-                print(project.name)
-
-            # print tasks below project name
-            if show_task_list:
-                if not project.task_list:
-                    print(" -empty-")
-                else:
-                    project.view_all_tasks()
-    
-
-class Project:
-    def __init__(self, name):
-        self.name = name.capitalize()  # name of project
-        self.task_list = []  # store all task objects
-
-    def __repr__(self):
-        return '{self.__class__.__name__}({self.name}, {self.task_list})'.format(self=self)
-
-    def add_task(self):
-        while True:
-            name = input("Task name (leave blank to stop): ")
-            if name == "":
-                break
-            task = Task(name)
-            self.task_list.append(task)
-
-    def view_all_tasks(self, show_numbers=False):
-        for i, task in enumerate(self.task_list):
-            if show_numbers:
-                print(f"{i+1}. [{'x' if task.completed else ' '}] {task.name}")
-            else:
-                print(f"[{'x' if task.completed else ' '}] {task.name}")
-
-
-class Task:
-    def __init__(self, name):
-        self.name = name.capitalize()  # name of task
-        self.completed = False  # if task is done
-
-    def __repr__(self):
-        return '{self.__class__.__name__}({self.name}, {self.completed}'.format(self=self)
-
-    def set_completed(self):
-        # set completed from True -> False or False -> True
-        if self.completed:
-            self.completed = False
-        else:
-            self.completed = True
+from listinterface import ListInterface
 
 
 def main():
@@ -74,7 +9,7 @@ def main():
         li.view_all_lists()
         print()
 
-        print("1. Add project | 2. Select project | 3. Add task by date | 4. Quit")
+        print("1. Add project | 2. Select project | 3. Quit")
         value = input("Select option: ")
         if value == "1":  # Add project
             li.add_project()
