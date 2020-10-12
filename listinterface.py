@@ -1,9 +1,10 @@
 from project import Project
+from read_write_file import read
 
 
 class ListInterface:
     def __init__(self):
-        self.project_lists = []  # stores all Project objects
+        self.project_lists = read()  # stores all Project objects
 
     def __repr__(self):
         return '{self.__class__.__name__}({self.project_lists})'.format(self=self)

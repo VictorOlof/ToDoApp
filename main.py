@@ -1,4 +1,5 @@
 from listinterface import ListInterface
+from read_write_file import save
 
 
 def main():
@@ -9,7 +10,7 @@ def main():
         li.view_all_lists()
         print()
 
-        print("1. Add project | 2. Select project | 3. Quit")
+        print("1. Add project | 2. Select project | 3. Save and Quit")
         value = input("Select option: ")
         if value == "1":  # Add project
             li.add_project()
@@ -35,6 +36,7 @@ def main():
                     selected_task = selected_project.task_list[selected_task_value-1]
                     selected_task.set_completed()  # Set completed to true or false
         elif value == "3":  # Quit application
+            save(li.project_lists)
             break
 
 if __name__ == '__main__':
