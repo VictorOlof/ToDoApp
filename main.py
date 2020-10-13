@@ -9,6 +9,8 @@ def main():
     while True:
         li.view_all_lists()
         print()
+        print(li.project_lists)
+        print()
 
         print("1. Add project | 2. Select project | 3. Save and Quit")
         value = input("Select option: ")
@@ -28,11 +30,11 @@ def main():
                 selected_project.view_all_tasks(show_numbers=True)
                 print()
 
-                print("1. Add task | 2. Mark task")
+                print("1. Add task | 2. Mark task | 3. Remove Task | 4. Remove project")
                 value = input("Select option (leave blank to stop): ")
                 if value == "":
                     break
-                    
+
                 elif value == "1":  # Add task
                     selected_project.add_task()
 
@@ -40,6 +42,14 @@ def main():
                     selected_task_value = int(input("Select task: "))
                     selected_task = selected_project.task_list[selected_task_value-1]
                     selected_task.set_completed()  # Set completed to true or false
+
+                elif value == "3":
+                    selected_task_value = int(input("Select task: "))
+                    selected_project.remove_task(selected_task_value - 1)
+
+                elif value == "4":  # Remove project
+                    li.remove_project(selected_project_value-1)
+                    break
 
         elif value == "3":  # Quit application
             save(li.project_lists)

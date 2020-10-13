@@ -14,6 +14,9 @@ class ListInterface:
         project = Project(name)
         self.project_lists.append(project)
 
+    def remove_project(self, index):
+        del self.project_lists[index]
+
     def view_all_lists(self, show_numbers=False, show_task_list=True):
         # print projects name
         for i, project in enumerate(self.project_lists):
