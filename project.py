@@ -20,6 +20,6 @@ class Project:
     def view_all_tasks(self, show_numbers=False):
         for i, task in enumerate(self.task_list):
             if show_numbers:
-                print(f"{i+1}. [{'x' if task.completed else ' '}] {task.name}")
+                print(f"{i+1}. {task.get_task()}")
             else:
-                print(f"[{'x' if task.completed else ' '}] {task.name}")
+                print(f"{task.get_task()}")

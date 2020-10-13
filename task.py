@@ -12,3 +12,6 @@ class Task:
             self.completed = False
         else:
             self.completed = True
+
+    def get_task(self):
+        return f"[{'x' if self.completed else ' '}] {self.name}"
