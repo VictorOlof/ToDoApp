@@ -17,7 +17,7 @@ def main():
         print()
 
         print("1. Add project | 2. Select project | 3. Save and Quit")
-        print("4. Add task by date")
+        print("4. Add task by date | 5 Select Task with date")
         value = input("Select option: ")
 
         if value == "1":  # Add project
@@ -60,8 +60,27 @@ def main():
             save(pli.project_lists)
             break
 
-        elif value == "4":
+        elif value == "4":  # Add task by date
             dli.add_task()
+
+        elif value == "5":  # Select task with date
+            while True:
+                print("All tasks:")
+                dli.view_all_tasks(show_numbers=True)
+
+                print("1. Mark task | 2. Remove Task")
+                value = input("Select option (leave blank to stop): ")
+                if value == "":
+                    break
+
+                elif value == "1":  # Mark task
+                    selected_task_value = int(input("Select task: "))
+                    selected_task = dli.task_list[selected_task_value - 1]
+                    selected_task.set_completed()
+
+                elif value == "2":  # Remove task
+                    selected_task_value = int(input("Select task: "))
+                    dli.remove_task(selected_task_value - 1)
 
 
 if __name__ == '__main__':
