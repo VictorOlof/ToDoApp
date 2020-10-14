@@ -9,10 +9,8 @@ def main():
 
     while True:
         p_li.view_all_lists()
-        print("Today:")
+        print("Tasks for today:")
         d_li.view_task_by_date("today")
-        print("All tasks:")
-        d_li.view_all_tasks()
         print()
 
         print("1. Add project | 2. Select project | 3. Quit")
