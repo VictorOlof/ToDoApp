@@ -1,7 +1,7 @@
-from task import Task
+from project_task import ProjectTask
 
 
-class DateTask(Task):
+class DateTask(ProjectTask):
     def __init__(self, name, task_date):
         super().__init__(name)
         self.task_date = task_date

@@ -1,4 +1,4 @@
-from task import Task
+from project_task import ProjectTask
 
 
 class Project:
@@ -14,7 +14,7 @@ class Project:
             name = input("Task name (leave blank to stop): ")
             if name == "":
                 break
-            task = Task(name)
+            task = ProjectTask(name)
             self.task_list.append(task)
 
     def remove_task(self, index):
