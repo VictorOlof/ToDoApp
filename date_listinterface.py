@@ -13,9 +13,7 @@ class DateListInterface:
         name = input("Task name: ")
         task_date = input("Task date (dd-mm-åå): ")
         task = DateTask(name, task_date)
-
         self.task_list.append(task)
-        self.write_to_file(self.task_list)
 
     def remove_task(self, index):
         del self.task_list[index]
@@ -32,7 +30,8 @@ class DateListInterface:
             if task.task_date == date:
                 print(f"{task.get_task()}")
 
-    def read_from_file(self):
+    @staticmethod
+    def read_from_file():
         tasks = []
         try:
             with open("date_tasks.dat", "rb") as date_tasks_file:
@@ -46,7 +45,8 @@ class DateListInterface:
             return tasks
         return tasks
 
-    def write_to_file(self, task_list: list):
+    @staticmethod
+    def write_to_file(task_list: list):
         with open("date_tasks.dat", "wb") as date_tasks_file:
             for task in task_list:
                 pickle.dump(task, date_tasks_file)

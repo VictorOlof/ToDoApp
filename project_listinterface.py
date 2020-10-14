@@ -1,10 +1,10 @@
 from project import Project
-from read_write_file import read
+import pickle
 
 
 class ProjectListInterface:
     def __init__(self):
-        self.project_lists = read()  # stores all Project objects
+        self.project_lists = self.read_from_file()  # stores all Project objects
 
     def __repr__(self):
         return '{self.__class__.__name__}({self.project_lists})'.format(self=self)
@@ -31,3 +31,24 @@ class ProjectListInterface:
                     print(" -empty-")
                 else:
                     project.view_all_tasks()
+
+    @staticmethod
+    def read_from_file():
+        tasks = []
+        try:
+            with open("date_tasks.dat", "rb") as date_tasks_file:
+                while True:
+                    try:
+                        task = pickle.load(date_tasks_file)
+                        tasks.append(task)
+                    except EOFError:
+                        break
+        except FileNotFoundError:
+            return tasks
+        return tasks
+
+    @staticmethod
+    def write_to_file(task_list: list):
+        with open("date_tasks.dat", "wb") as date_tasks_file:
+            for task in task_list:
+                pickle.dump(task, date_tasks_file)
