@@ -4,15 +4,15 @@ from date_listinterface import DateListInterface
 
 def main():
     # start of application
-    pli = ProjectListInterface()
-    dli = DateListInterface()
+    p_li = ProjectListInterface()
+    d_li = DateListInterface()
 
     while True:
-        pli.view_all_lists()
+        p_li.view_all_lists()
         print("Today:")
-        dli.view_task_by_date("today")
+        d_li.view_task_by_date("today")
         print("All tasks:")
-        dli.view_all_tasks()
+        d_li.view_all_tasks()
         print()
 
         print("1. Add project | 2. Select project | 3. Quit")
@@ -20,13 +20,13 @@ def main():
         value = input("Select option: ")
 
         if value == "1":  # Add project
-            pli.add_project()
+            p_li.add_project()
 
         elif value == "2":  # Select project
-            pli.view_all_lists(show_numbers=True, show_task_list=False)
+            p_li.view_all_lists(show_numbers=True, show_task_list=False)
 
             selected_project_value = int(input("Select project: "))
-            selected_project = pli.project_lists[selected_project_value - 1]
+            selected_project = p_li.project_lists[selected_project_value - 1]
 
             while True:
                 print(f"You are working with the project:")
@@ -52,18 +52,18 @@ def main():
                     selected_project.remove_task(selected_task_value - 1)
 
                 elif value == "4":  # Remove project
-                    pli.remove_project(selected_project_value - 1)
+                    p_li.remove_project(selected_project_value - 1)
 
         elif value == "3":  # Quit application
             break
 
         elif value == "4":  # Add task by date
-            dli.add_task()
+            d_li.add_task()
 
         elif value == "5":  # Select task with date
             while True:
                 print("All tasks:")
-                dli.view_all_tasks(show_numbers=True)
+                d_li.view_all_tasks(show_numbers=True)
                 print()
 
                 print("1. Mark task | 2. Remove Task")
@@ -73,12 +73,12 @@ def main():
 
                 elif value == "1":  # Mark task
                     selected_task_value = int(input("Select task: "))
-                    selected_task = dli.task_list[selected_task_value - 1]
+                    selected_task = d_li.task_list[selected_task_value - 1]
                     selected_task.set_completed()
 
                 elif value == "2":  # Remove task
                     selected_task_value = int(input("Select task: "))
-                    dli.remove_task(selected_task_value - 1)
+                    d_li.remove_task(selected_task_value - 1)
 
 
 if __name__ == '__main__':
