@@ -2,7 +2,7 @@ from project import Project
 from read_write_file import read
 
 
-class ListInterface:
+class ProjectListInterface:
     def __init__(self):
         self.project_lists = read()  # stores all Project objects
 

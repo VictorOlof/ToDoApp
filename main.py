@@ -1,15 +1,15 @@
-from listinterface import ListInterface
+from project_listinterface import ProjectListInterface
 from read_write_file import save
 from date_listinterface import DateListInterface
 
 
 def main():
     # start of application
-    li = ListInterface()
+    pli = ProjectListInterface()
     dli = DateListInterface()
 
     while True:
-        li.view_all_lists()
+        pli.view_all_lists()
         print("Today:")
         dli.view_task_by_date("today")
         print("All tasks:")
@@ -21,13 +21,13 @@ def main():
         value = input("Select option: ")
 
         if value == "1":  # Add project
-            li.add_project()
+            pli.add_project()
 
         elif value == "2":  # Select project
-            li.view_all_lists(show_numbers=True, show_task_list=False)
+            pli.view_all_lists(show_numbers=True, show_task_list=False)
 
             selected_project_value = int(input("Select project: "))
-            selected_project = li.project_lists[selected_project_value - 1]
+            selected_project = pli.project_lists[selected_project_value - 1]
 
             while True:
                 print(f"You are working with the project:")
@@ -53,11 +53,11 @@ def main():
                     selected_project.remove_task(selected_task_value - 1)
 
                 elif value == "4":  # Remove project
-                    li.remove_project(selected_project_value - 1)
+                    pli.remove_project(selected_project_value - 1)
                     break
 
         elif value == "3":  # Quit application
-            save(li.project_lists)
+            save(pli.project_lists)
             break
 
         elif value == "4":
