@@ -1,18 +1,23 @@
 from listinterface import ListInterface
 from read_write_file import save
+from date_listinterface import DateListInterface
 
 
 def main():
     # start of application
     li = ListInterface()
+    dli = DateListInterface()
 
     while True:
         li.view_all_lists()
-        print()
-        print(li.project_lists)
+        print("Today:")
+        dli.view_task_by_date("today")
+        print("All tasks:")
+        dli.view_all_tasks()
         print()
 
         print("1. Add project | 2. Select project | 3. Save and Quit")
+        print("4. Add task by date")
         value = input("Select option: ")
 
         if value == "1":  # Add project
@@ -22,7 +27,7 @@ def main():
             li.view_all_lists(show_numbers=True, show_task_list=False)
 
             selected_project_value = int(input("Select project: "))
-            selected_project = li.project_lists[selected_project_value-1]
+            selected_project = li.project_lists[selected_project_value - 1]
 
             while True:
                 print(f"You are working with the project:")
@@ -40,7 +45,7 @@ def main():
 
                 elif value == "2":  # Mark task
                     selected_task_value = int(input("Select task: "))
-                    selected_task = selected_project.task_list[selected_task_value-1]
+                    selected_task = selected_project.task_list[selected_task_value - 1]
                     selected_task.set_completed()  # Set completed to true or false
 
                 elif value == "3":
@@ -48,12 +53,16 @@ def main():
                     selected_project.remove_task(selected_task_value - 1)
 
                 elif value == "4":  # Remove project
-                    li.remove_project(selected_project_value-1)
+                    li.remove_project(selected_project_value - 1)
                     break
 
         elif value == "3":  # Quit application
             save(li.project_lists)
             break
+
+        elif value == "4":
+            dli.add_task()
+
 
 if __name__ == '__main__':
     main()

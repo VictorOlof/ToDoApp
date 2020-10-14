@@ -19,9 +19,9 @@ class ListInterface:
 
     def view_all_lists(self, show_numbers=False, show_task_list=True):
         # print projects name
-        for i, project in enumerate(self.project_lists):
+        for i, project in enumerate(self.project_lists, start=1):
             if show_numbers:
-                print(f"{i+1}. {project.name}")
+                print(f"{i}. {project.name}")
             else:
                 print(project.name)
 
