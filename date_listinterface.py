@@ -31,9 +31,12 @@ class DateListInterface:
 
     def view_task_by_date(self, date_str):
         """Views all tasks by date in string format dd-mm-yy"""
-        for i, task in enumerate(self.task_list, start=1):
-            if task.task_date == date_str:
-                print(f"{task.get_task()}")
+        if self.task_list:
+            for i, task in enumerate(self.task_list, start=1):
+                if task.task_date == date_str:
+                    print(f"{task.get_task()}")
+        else:
+            print(" -empty-")
 
     @staticmethod
     def read_from_file():
