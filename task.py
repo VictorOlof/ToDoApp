@@ -4,14 +4,15 @@ class Task:
         self.completed = False  # if task is done
 
     def __repr__(self):
-        return '{self.__class__.__name__}({self.name}, {self.completed}'.format(self=self)
+        return f"{self.__class__.__name__}({self.name}, {self.completed}"
 
     def set_completed(self):
-        # set completed from True -> False or False -> True
+        """Sets completed True->False or False->True"""
         if self.completed:
             self.completed = False
         else:
             self.completed = True
 
     def get_task(self):
+        """Return the task information for user in readable format"""
         return f"[{'x' if self.completed else ' '}] {self.name}"

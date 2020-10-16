@@ -7,9 +7,10 @@ class Project:
         self.task_list = []  # store all task objects
 
     def __repr__(self):
-        return '{self.__class__.__name__}({self.name}, {self.task_list})'.format(self=self)
+        return f"{self.__class__.__name__}({self.name}, {self.task_list})"
 
     def add_task(self):
+        """Creates a Task obj and saves in task_list"""
         while True:
             name = input("Task name (leave blank to stop): ")
             if name == "":
@@ -18,9 +19,11 @@ class Project:
             self.task_list.append(task)
 
     def remove_task(self, index):
+        """Removes Task obj from task_list"""
         del self.task_list[index]
 
     def view_all_tasks(self, show_numbers=False):
+        """Views all tasks in task_list with or without numbers"""
         for i, task in enumerate(self.task_list, start=1):
             if show_numbers:
                 print(f"{i}. {task.get_task()}")
