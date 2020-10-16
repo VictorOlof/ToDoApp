@@ -1,5 +1,20 @@
 from project_listinterface import ProjectListInterface
 from date_listinterface import DateListInterface
+from os import system, name
+from datetime import datetime
+
+
+TODAY = datetime.now().strftime("%d-%m-%y")
+
+
+def clear_window():
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+        # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
 
 def main():
@@ -8,9 +23,10 @@ def main():
     d_li = DateListInterface()
 
     while True:
+        clear_window()
         p_li.view_all_lists()
         print("Tasks for today:")
-        d_li.view_task_by_date("today")
+        d_li.view_task_by_date(TODAY)
         print()
 
         print("1. Add project | 2. Select project | 3. Quit")

@@ -11,8 +11,9 @@ class DateListInterface:
 
     def add_task(self):
         name = input("Task name: ")
-        task_date = input("Task date (dd-mm-åå): ")
-        task = DateTask(name, task_date)
+        date_str = input("Task date (dd-mm-åå): ")
+
+        task = DateTask(name, date_str)
         self.task_list.append(task)
 
     def remove_task(self, index):
@@ -25,9 +26,9 @@ class DateListInterface:
             else:
                 print(f"{task.get_task()}")
 
-    def view_task_by_date(self, date):
+    def view_task_by_date(self, date_str):
         for i, task in enumerate(self.task_list, start=1):
-            if task.task_date == date:
+            if task.task_date == date_str:
                 print(f"{task.get_task()}")
 
     @staticmethod
