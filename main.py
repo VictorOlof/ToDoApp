@@ -67,6 +67,7 @@ def main():
 
                 elif value == "4":  # Remove project
                     p_li.remove_project(selected_project_value - 1)
+                    break
 
         elif value == "3":  # Quit application
             break
