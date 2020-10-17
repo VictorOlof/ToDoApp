@@ -1,5 +1,9 @@
 import pickle
 from date_task import DateTask
+from datetime import datetime
+
+
+TODAY = datetime.now().strftime("%d-%m-%y")
 
 
 class DateListInterface:
@@ -37,6 +41,13 @@ class DateListInterface:
                     print(f"{task.get_task()}")
         else:
             print(" -empty-")
+
+    def view_missed_tasks(self):
+        if self.task_list:
+            for task in self.task_list:
+                time = datetime.strptime(task.task_date, "%d-%m-%y")
+                if (datetime.now() - time).days >= 1:
+                    print(f"{task.get_task()}")
 
     @staticmethod
     def read_from_file():

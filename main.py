@@ -27,6 +27,8 @@ def main():
         p_li.view_all_lists()
         print("Tasks for today:")
         d_li.view_task_by_date(TODAY)
+        print("Missed tasks:")
+        d_li.view_missed_tasks()  # Displays tasks older than today
         print()
 
         print("1. Add project | 2. Select project | 3. Quit")
