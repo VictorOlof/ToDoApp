@@ -24,15 +24,17 @@ def main():
 
     while True:
         clear_window()
+        print("Projects:")
         p_li.view_all_lists()
+        print()
         print("Tasks for today:")
         d_li.view_task_by_date(TODAY)
         print("Missed tasks:")
         d_li.view_missed_tasks()  # Displays tasks older than today
         print()
 
-        print("1. Add project | 2. Select project | 3. Quit")
-        print("4. Add task by date | 5 Select Task with date")
+        print("1. Add project | 2. Select project")
+        print("3. Add task by date | 4. Select task with date")
         value = input("Select option: ")
 
         if value == "1":  # Add project
@@ -71,13 +73,10 @@ def main():
                     p_li.remove_project(selected_project_value - 1)
                     break
 
-        elif value == "3":  # Quit application
-            break
-
-        elif value == "4":  # Add task by date
+        elif value == "3":  # Add task by date
             d_li.add_task()
 
-        elif value == "5":  # Select task with date
+        elif value == "4":  # Select task with date
             while True:
                 print("All tasks:")
                 d_li.view_all_tasks(show_numbers=True)

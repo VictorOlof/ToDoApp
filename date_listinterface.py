@@ -26,8 +26,9 @@ class DateListInterface:
         del self.task_list[index]
 
     def view_all_tasks(self, show_numbers=False):
-        """Views all tasks in task_list with or without numbers"""
-        for i, task in enumerate(self.task_list, start=1):
+        """Views all tasks in task_list sorted by date, with or without numbers"""
+        sorted_task_list = self.sort_list_by_date(self.task_list)
+        for i, task in enumerate(sorted_task_list, start=1):
             if show_numbers:
                 print(f"{i}. {task.get_task()}")
             else:
@@ -50,6 +51,16 @@ class DateListInterface:
                     time = datetime.strptime(task.task_date, "%d-%m-%y")
                     if (datetime.now() - time).days >= 1:
                         print(f"{task.get_task()}")
+
+    @staticmethod
+    def sort_list_by_date(sequence: list) -> list:
+        """
+        Takes in a sequence of DateTask object. Return sequence sorted by date.
+        :param sequence: list
+        :return: list
+        """
+        sequence.sort(key=lambda date: datetime.strptime(date.task_date, "%d-%m-%y"))
+        return sequence
 
     @staticmethod
     def read_from_file():
