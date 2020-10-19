@@ -31,23 +31,25 @@ class DateListInterface:
             if show_numbers:
                 print(f"{i}. {task.get_task()}")
             else:
-                print(f"{task.get_task()}")
+                print(task.get_task())
 
     def view_task_by_date(self, date_str):
         """Views all tasks by date in string format dd-mm-yy"""
         if self.task_list:
-            for i, task in enumerate(self.task_list, start=1):
+            for task in self.task_list:
                 if task.task_date == date_str:
-                    print(f"{task.get_task()}")
+                    print(task.get_task())
         else:
             print(" -empty-")
 
     def view_missed_tasks(self):
+        """Print all uncompleted tasks from yesterday or older"""
         if self.task_list:
             for task in self.task_list:
-                time = datetime.strptime(task.task_date, "%d-%m-%y")
-                if (datetime.now() - time).days >= 1:
-                    print(f"{task.get_task()}")
+                if not task.completed:
+                    time = datetime.strptime(task.task_date, "%d-%m-%y")
+                    if (datetime.now() - time).days >= 1:
+                        print(f"{task.get_task()}")
 
     @staticmethod
     def read_from_file():
