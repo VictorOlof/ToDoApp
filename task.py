@@ -14,6 +14,8 @@ class Task:
     def name(self, name):
         if len(name) > 15:
             raise ValueError("Name of task cannot be longer than 15 chars")
+        elif name == "":
+            raise ValueError("Name of task cannot be empty.")
         else:
             self._name = name.capitalize()
 
