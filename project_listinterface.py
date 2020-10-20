@@ -11,8 +11,13 @@ class ProjectListInterface:
 
     def add_project(self):
         """Creates a Project obj and saves in project_list"""
-        name = input("Enter project name: ")
-        project = Project(name)
+        while True:
+            name = input("Enter project name: ")
+            try:
+                project = Project(name)
+                break
+            except ValueError:
+                print("Invalid name. Try again.")
         self.project_lists.append(project)
 
     def remove_project(self, index):

@@ -3,11 +3,24 @@ from task import Task
 
 class Project:
     def __init__(self, name):
-        self.name = name.capitalize()  # name of project
+        self.name = name  # name of project
         self.task_list = []  # store all task objects
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.name}, {self.task_list})"
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        if len(name) > 15:
+            raise ValueError("Name of project cannot be longer than 15 chars")
+        elif name == "":
+            raise ValueError("Name of project cannot be empty.")
+        else:
+            self._name = name.capitalize()
 
     def add_task(self):
         """Creates a Task obj and saves in task_list"""
