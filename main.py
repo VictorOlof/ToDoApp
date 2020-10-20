@@ -24,6 +24,8 @@ def main():
 
     while True:
         clear_window()
+        print(d_li.task_list)
+
         print("Projects:")
         p_li.view_all_lists()
         print()
@@ -63,7 +65,7 @@ def main():
                 elif value == "2":  # Mark task
                     selected_task_value = int(input("Select task: "))
                     selected_task = selected_project.task_list[selected_task_value - 1]
-                    selected_task.set_completed()  # Set completed to true or false
+                    selected_task.mark_task()  # Set completed to true or false
 
                 elif value == "3":  # Remove task
                     selected_task_value = int(input("Select task: "))
@@ -90,7 +92,7 @@ def main():
                 elif value == "1":  # Mark task
                     selected_task_value = int(input("Select task: "))
                     selected_task = d_li.task_list[selected_task_value - 1]
-                    selected_task.set_completed()
+                    selected_task.mark_task()
 
                 elif value == "2":  # Remove task
                     selected_task_value = int(input("Select task: "))
