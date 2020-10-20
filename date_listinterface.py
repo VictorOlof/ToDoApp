@@ -1,14 +1,10 @@
-import pickle
 from date_task import DateTask
 from datetime import datetime
 
 
-TODAY = datetime.now().strftime("%d-%m-%y")
-
-
 class DateListInterface:
     def __init__(self):
-        self.task_list = self.read_from_file()
+        self.task_list = []
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.task_list})"
@@ -65,26 +61,3 @@ class DateListInterface:
         """
         sequence.sort(key=lambda date: datetime.strptime(date.task_date, "%d-%m-%y"))
         return sequence
-
-    @staticmethod
-    def read_from_file():
-        """Return all DateTask objects from file"""
-        tasks = []
-        try:
-            with open("date_tasks.dat", "rb") as date_tasks_file:
-                while True:
-                    try:
-                        task = pickle.load(date_tasks_file)
-                        tasks.append(task)
-                    except EOFError:
-                        break
-        except FileNotFoundError:
-            return tasks
-        return tasks
-
-    @staticmethod
-    def write_to_file(task_list: list):
-        """Write all DateTask object to file"""
-        with open("date_tasks.dat", "wb") as date_tasks_file:
-            for task in task_list:
-                pickle.dump(task, date_tasks_file)
