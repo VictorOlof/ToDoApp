@@ -4,7 +4,7 @@ class Task:
         self.completed = False  # if task is done
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.name}, {self.completed}"
+        return f"{self.__class__.__name__}({self.name}, {self.completed})"
 
     @property
     def name(self):
