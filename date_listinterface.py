@@ -15,10 +15,14 @@ class DateListInterface:
 
     def add_task(self):
         """Creates a DateTask obj and saves in task_list"""
-        name = input("Task name: ")
-        date_str = input("Task date (dd-mm-åå): ")
-
-        task = DateTask(name, date_str)
+        while True:
+            name = input("Task name: ")
+            date_str = input("Task date (dd-mm-yy): ")
+            try:
+                task = DateTask(name, date_str)
+                break
+            except ValueError:
+                print("Invalid name or date. Try again.")
         self.task_list.append(task)
 
     def remove_task(self, index):
