@@ -12,11 +12,13 @@ class Project:
     def add_task(self):
         """Creates a Task obj and saves in task_list"""
         while True:
-            name = input("Task name (leave blank to stop): ")
-            if name == "":
+            name = input("Task name: ")
+            try:
+                task = Task(name)
                 break
-            task = Task(name)
-            self.task_list.append(task)
+            except ValueError:
+                print("Invalid name. Try again.")
+        self.task_list.append(task)
 
     def remove_task(self, index):
         """Removes Task obj from task_list"""
