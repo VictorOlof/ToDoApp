@@ -2,8 +2,8 @@ from project import Project
 
 
 class ProjectListInterface:
-    def __init__(self):
-        self.project_lists = []  # stores all Project objects
+    def __init__(self, project_lists):
+        self.project_lists = project_lists  # stores all Project objects
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.project_lists})'"
