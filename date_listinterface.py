@@ -3,8 +3,8 @@ from datetime import datetime
 
 
 class DateListInterface:
-    def __init__(self):
-        self.task_list = []
+    def __init__(self, task_list):
+        self.task_list = task_list
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.task_list})"
