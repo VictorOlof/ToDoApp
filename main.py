@@ -2,7 +2,7 @@ from project_listinterface import ProjectListInterface
 from date_listinterface import DateListInterface
 from os import system, name
 from datetime import datetime
-
+import pickle
 
 TODAY = datetime.now().strftime("%d-%m-%y")
 
@@ -17,14 +17,38 @@ def clear_window():
         _ = system('clear')
 
 
+def write_sequence_to_file(sequence: list, filename: str):
+    """Write a sequence of items from list into a file"""
+    with open(filename, "wb") as file:
+        for item in sequence:
+            pickle.dump(item, file)
+
+
+def read_sequence_from_file(filename) -> list:
+    """Reads a sequence of items from file and returns in a list"""
+    sequence = []
+    try:
+        with open(filename, "rb") as file:
+            while True:
+                try:
+                    item = pickle.load(file)
+                    sequence.append(item)
+                except EOFError:
+                    break
+    except FileNotFoundError:
+        return sequence
+    return sequence
+
+
 def main():
     # start of application
-    p_li = ProjectListInterface()
-    d_li = DateListInterface()
+    p_li = ProjectListInterface(project_list=read_sequence_from_file("project_listinterface.dat"))
+    d_li = DateListInterface(task_list=read_sequence_from_file("date_listinterface.dat"))
 
     while True:
         clear_window()
         print(d_li.task_list)
+        print(p_li.project_lists)
 
         print("Projects:")
         p_li.view_all_lists()
@@ -97,6 +121,10 @@ def main():
                 elif value == "2":  # Remove task
                     selected_task_value = int(input("Select task: "))
                     d_li.remove_task(selected_task_value - 1)
+
+        # Save changes to file
+        write_sequence_to_file(p_li.project_lists, "project_listinterface.dat")
+        write_sequence_to_file(d_li.task_list, "date_listinterface.dat")
 
 
 if __name__ == '__main__':
