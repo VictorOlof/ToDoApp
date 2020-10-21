@@ -6,7 +6,6 @@ class DateTask(Task):
     def __init__(self, name, task_date):
         super().__init__(name)
         self.task_date = task_date
-        self.completed = False
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self.name}, {self.completed}, {self.task_date}'""

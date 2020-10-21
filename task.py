@@ -1,7 +1,7 @@
 class Task:
     def __init__(self, name):
         self.name = name  # name of task
-        self.completed = False  # if task is done
+        self._completed = False  # if task is done
 
     def __repr__(self):
         return f"{self.__class__.__name__}({self.name}, {self.completed})"
@@ -19,12 +19,16 @@ class Task:
         else:
             self._name = name.capitalize()
 
+    @property
+    def completed(self):
+        return self._completed
+
     def mark_task(self):
         """Sets completed True->False or False->True"""
         if self.completed:
-            self.completed = False
+            self._completed = False
         else:
-            self.completed = True
+            self._completed = True
 
     def get_task(self):
         """Return the task information for user in readable format"""
