@@ -8,6 +8,9 @@ class ProjectListInterface:
     def __repr__(self):
         return f"{self.__class__.__name__}({self.project_lists})'"
 
+    def __len__(self):
+        return len(self.project_lists)
+
     def add_project(self):
         """Creates a Project obj and saves in project_list"""
         while True:

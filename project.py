@@ -9,6 +9,9 @@ class Project:
     def __repr__(self):
         return f"{self.__class__.__name__}({self.name}, {self.task_list})"
 
+    def __len__(self):
+        return len(self.task_list)
+
     @property
     def name(self):
         return self._name
