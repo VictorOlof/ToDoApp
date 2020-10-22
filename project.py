@@ -23,7 +23,7 @@ class Project:
         elif name == "":
             raise ValueError("Name of project cannot be empty.")
         else:
-            self._name = name.capitalize()
+            self._name = name.capitalize().strip()
 
     def add_task(self):
         """Creates a Task obj and saves in task_list"""

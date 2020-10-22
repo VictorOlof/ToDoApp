@@ -17,7 +17,7 @@ class Task:
         elif name == "":
             raise ValueError("Name of task cannot be empty.")
         else:
-            self._name = name.capitalize()
+            self._name = name.capitalize().strip()
 
     def mark_task(self):
         """Sets completed True->False or False->True"""
