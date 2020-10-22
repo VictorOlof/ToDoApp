@@ -42,21 +42,22 @@ def read_sequence_from_file(filename) -> list:
 
 def main():
     # start of application
-    p_li = ProjectListInterface(project_list=read_sequence_from_file("project_listinterface.dat"))
-    d_li = DateListInterface(task_list=read_sequence_from_file("date_listinterface.dat"))
+    proj_li = ProjectListInterface(project_lists=read_sequence_from_file("project_listinterface.dat"))
+    date_li = DateListInterface(task_list=read_sequence_from_file("date_listinterface.dat"))
 
     while True:
         clear_window()
-        print(d_li.task_list)
-        print(p_li.project_lists)
+        # print(date_li.task_list)
+        # print(proj_li.project_lists)
 
         print("Projects:")
-        p_li.view_all_lists()
+        proj_li.view_all_lists()
         print()
         print("Tasks for today:")
-        d_li.view_task_by_date(TODAY)
+        date_li.view_task_by_date(TODAY)
+        print()
         print("Missed tasks:")
-        d_li.view_missed_tasks()  # Displays tasks older than today
+        date_li.view_missed_tasks()  # Displays tasks older than today
         print()
 
         print("1. Add project | 2. Select project")
@@ -64,13 +65,13 @@ def main():
         value = input("Select option: ")
 
         if value == "1":  # Add project
-            p_li.add_project()
+            proj_li.add_project()
 
         elif value == "2":  # Select project
-            p_li.view_all_lists(show_numbers=True, show_task_list=False)
+            proj_li.view_all_lists(show_numbers=True, show_task_list=False)
 
             selected_project_value = int(input("Select project: "))
-            selected_project = p_li.project_lists[selected_project_value - 1]
+            selected_project = proj_li.project_lists[selected_project_value - 1]
 
             while True:
                 print(f"You are working with the project:")
@@ -96,16 +97,16 @@ def main():
                     selected_project.remove_task(selected_task_value - 1)
 
                 elif value == "4":  # Remove project
-                    p_li.remove_project(selected_project_value - 1)
+                    proj_li.remove_project(selected_project_value - 1)
                     break
 
         elif value == "3":  # Add task by date
-            d_li.add_task()
+            date_li.add_task()
 
         elif value == "4":  # Select task with date
             while True:
                 print("All tasks:")
-                d_li.view_all_tasks(show_numbers=True)
+                date_li.view_all_tasks(show_numbers=True)
                 print()
 
                 print("1. Mark task | 2. Remove Task")
@@ -115,16 +116,16 @@ def main():
 
                 elif value == "1":  # Mark task
                     selected_task_value = int(input("Select task: "))
-                    selected_task = d_li.task_list[selected_task_value - 1]
+                    selected_task = date_li.task_list[selected_task_value - 1]
                     selected_task.mark_task()
 
                 elif value == "2":  # Remove task
                     selected_task_value = int(input("Select task: "))
-                    d_li.remove_task(selected_task_value - 1)
+                    date_li.remove_task(selected_task_value - 1)
 
         # Save changes to file
-        write_sequence_to_file(p_li.project_lists, "project_listinterface.dat")
-        write_sequence_to_file(d_li.task_list, "date_listinterface.dat")
+        write_sequence_to_file(proj_li.project_lists, "project_listinterface.dat")
+        write_sequence_to_file(date_li.task_list, "date_listinterface.dat")
 
 
 if __name__ == '__main__':
