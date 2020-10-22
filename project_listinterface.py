@@ -25,16 +25,11 @@ class ProjectListInterface:
 
     def view_all_lists(self, show_numbers=False, show_task_list=True):
         """Views all projects in project_list with or without numbers. With or without tasks below"""
-        # print projects name
         for i, project in enumerate(self.project_lists, start=1):
             if show_numbers:
                 print(f"{i}. {project.name}")
             else:
                 print(project.name)
 
-            # print tasks below project name
             if show_task_list:
-                if not project.task_list:
-                    print(" -empty-")
-                else:
-                    project.view_all_tasks()
+                project.view_all_tasks()

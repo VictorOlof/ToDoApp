@@ -40,8 +40,6 @@ class DateListInterface:
             for task in self.task_list:
                 if task.task_date == date_str:
                     print(task.get_task())
-        else:
-            print(" -empty-")
 
     def view_missed_tasks(self):
         """Print all uncompleted tasks from yesterday or older"""
