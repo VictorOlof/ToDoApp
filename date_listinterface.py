@@ -36,9 +36,17 @@ class DateListInterface:
             except (ValueError, IndexError):
                 print("Invalid choice.")
 
-    def remove_task(self, index):
+    def remove_task(self):
         """Removes DateTask obj from task_list"""
-        del self.task_list[index]
+        while True:
+            selected_task_value = input("Select task: ")
+            try:
+                if selected_task_value == "0":
+                    raise IndexError
+                del self.task_list[int(selected_task_value) - 1]
+                break
+            except (ValueError, IndexError):
+                print("Invalid choice.")
 
     def view_all_tasks(self, show_numbers=False):
         """Views all tasks in task_list sorted by date, with or without numbers"""
