@@ -19,7 +19,7 @@ class Task:
         else:
             self._name = name.capitalize().strip()
 
-    def mark_task(self):
+    def set_completed(self):
         """Sets completed True->False or False->True"""
         if self.completed:
             self.completed = False
