@@ -36,16 +36,26 @@ class Project:
                 print("Invalid name. Try again.")
         self.task_list.append(task)
 
-    def remove_task(self, index):
+    def remove_task(self):
         """Removes Task obj from task_list"""
-        del self.task_list[index]
+        while True:
+            selected_task_value = input("Select task: ")
+            try:
+                if selected_task_value == "0":
+                    raise IndexError
+                del self.task_list[int(selected_task_value) - 1]
+                break
+            except (ValueError, IndexError):
+                print("Invalid choice.")
 
     def mark_task(self):
         while True:
             selected_task_value = input("Select task: ")
             try:
+                if selected_task_value == "0":
+                    raise IndexError
                 selected_task = self.task_list[int(selected_task_value) - 1]
-                selected_task.mark_task()
+                selected_task.set_completed()
                 break
             except (ValueError, IndexError):
                 print("Invalid choice.")
