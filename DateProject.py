@@ -2,7 +2,7 @@ from date_task import DateTask
 from datetime import datetime
 
 
-class DateListInterface:
+class DateProject:
     def __init__(self, task_list):
         self.task_list = task_list
 
