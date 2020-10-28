@@ -59,21 +59,22 @@ def menu_get_option(options):
 
 def main():
     # start of application
-    p_li = TaskProjectList(project_lists=read_sequence_from_file("project_listinterface.dat"))
-    d_li = DateProject(task_list=read_sequence_from_file("date_listinterface.dat"))
+    task_proj_list = TaskProjectList(project_lists=read_sequence_from_file("project_listinterface.dat"))
+    date_proj = DateProject(task_list=read_sequence_from_file("date_listinterface.dat"))
 
     while True:
         clear_window()
-        print(d_li.task_list)
-        print(p_li.project_lists)
+        print(date_proj.task_list)
+        print(task_proj_list.project_lists)
 
         print("Projects:")
-        p_li.view_all_lists()
+        task_proj_list.view_all_lists()
         print()
         print("Tasks for today:")
-        d_li.view_task_by_date(TODAY)
+        date_proj.view_task_by_date(TODAY)
+        print()
         print("Missed tasks:")
-        d_li.view_missed_tasks()  # Displays tasks older than today
+        date_proj.view_missed_tasks()  # Displays tasks older than today
         print()
 
         menu_options = (
@@ -86,13 +87,13 @@ def main():
         option = menu_get_option(menu_options)
 
         if option == 1:  # Add project
-            p_li.add_project()
+            task_proj_list.add_project()
 
         elif option == 2:  # Select project
-            p_li.view_all_lists(show_numbers=True, show_task_list=False)
+            task_proj_list.view_all_lists(show_numbers=True, show_task_list=False)
 
             selected_project_value = int(input("Select project: "))
-            selected_project = p_li.project_lists[selected_project_value - 1]
+            selected_project = task_proj_list.project_lists[selected_project_value - 1]
 
             while True:
                 clear_window()
@@ -121,20 +122,20 @@ def main():
                     selected_project.remove_task()
 
                 elif option == 4:  # Remove project
-                    p_li.remove_project(selected_project_value - 1)
+                    task_proj_list.remove_project(selected_project_value - 1)
                     break
 
                 elif option == 5:  # Leave menu
                     break
 
         elif option == 3:  # Add task by date
-            d_li.add_task()
+            date_proj.add_task()
 
         elif option == 4:  # Select task with date
             while True:
                 clear_window()
                 print("All tasks:")
-                d_li.view_all_tasks(show_numbers=True)
+                date_proj.view_all_tasks(show_numbers=True)
                 print()
 
                 menu_options = (
@@ -146,17 +147,17 @@ def main():
                 option = menu_get_option(menu_options)
 
                 if option == 1:  # Mark task
-                    d_li.mark_task()
+                    date_proj.mark_task()
 
                 elif option == 2:  # Remove task
-                    d_li.remove_task()
+                    date_proj.remove_task()
 
                 elif option == 3:  # Leave menu
                     break
 
         # Save changes to file
-        write_sequence_to_file(p_li.project_lists, "project_listinterface.dat")
-        write_sequence_to_file(d_li.task_list, "date_listinterface.dat")
+        write_sequence_to_file(task_proj_list.project_lists, "project_listinterface.dat")
+        write_sequence_to_file(date_proj.task_list, "date_listinterface.dat")
 
 
 if __name__ == '__main__':
