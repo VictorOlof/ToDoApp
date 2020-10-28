@@ -24,6 +24,18 @@ class DateListInterface:
                 print("Invalid name or date. Try again.")
         self.task_list.append(task)
 
+    def mark_task(self):
+        while True:
+            selected_task_value = input("Select task: ")
+            try:
+                if selected_task_value == "0":
+                    raise IndexError
+                selected_task = self.task_list[int(selected_task_value) - 1]
+                selected_task.set_completed()
+                break
+            except (ValueError, IndexError):
+                print("Invalid choice.")
+
     def remove_task(self, index):
         """Removes DateTask obj from task_list"""
         del self.task_list[index]
