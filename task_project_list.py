@@ -1,7 +1,7 @@
 from project import Project
 
 
-class ProjectListInterface:
+class TaskProjectList:
     def __init__(self, project_lists):
         self.project_lists = project_lists  # stores all Project objects
 

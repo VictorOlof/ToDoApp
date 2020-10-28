@@ -1,4 +1,4 @@
-from project_listinterface import ProjectListInterface
+from task_project_list import TaskProjectList
 from date_listinterface import DateListInterface
 from os import system, name
 from datetime import datetime
@@ -59,7 +59,7 @@ def menu_get_option(options):
 
 def main():
     # start of application
-    p_li = ProjectListInterface(project_lists=read_sequence_from_file("project_listinterface.dat"))
+    p_li = TaskProjectList(project_lists=read_sequence_from_file("project_listinterface.dat"))
     d_li = DateListInterface(task_list=read_sequence_from_file("date_listinterface.dat"))
 
     while True:
