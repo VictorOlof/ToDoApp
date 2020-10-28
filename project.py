@@ -40,6 +40,16 @@ class Project:
         """Removes Task obj from task_list"""
         del self.task_list[index]
 
+    def mark_task(self):
+        while True:
+            selected_task_value = input("Select task: ")
+            try:
+                selected_task = self.task_list[int(selected_task_value) - 1]
+                selected_task.mark_task()
+                break
+            except (ValueError, IndexError):
+                print("Invalid choice.")
+
     def view_all_tasks(self, show_numbers=False):
         """Views all tasks in task_list with or without numbers"""
         if self.task_list:
