@@ -49,8 +49,8 @@ class DateProject:
                 print("Invalid choice.")
 
     def view_all_tasks(self, show_numbers=False):
-        """Views all tasks in task_list sorted by date, with or without numbers"""
-        self.sort_task_list_by_date()
+        """Views all tasks in task_list by date, with or without numbers"""
+        # self.task_list.sort(key=lambda date: datetime.strptime(date.task_date, "%d-%m-%y"))
         for i, task in enumerate(self.task_list, start=1):
             if show_numbers:
                 print(f"{i}. {task.get_task()}")
@@ -72,7 +72,3 @@ class DateProject:
                     time = datetime.strptime(task.task_date, "%d-%m-%y")
                     if (datetime.now() - time).days >= 1:
                         print(f"{task.get_task()}")
-
-    def sort_task_list_by_date(self):
-        """Sort task_list by date"""
-        self.task_list.sort(key=lambda date: datetime.strptime(date.task_date, "%d-%m-%y"))
