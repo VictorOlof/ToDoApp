@@ -12,8 +12,10 @@ class Task:
 
     @name.setter
     def name(self, name):
-        if len(name) > 15:
-            raise ValueError("Name of task cannot be longer than 15 chars")
+        if not isinstance(name, str):
+            raise TypeError("Name of task needs be type of str")
+        if len(name) > 25:
+            raise ValueError("Name of task cannot be longer than 25 characters")
         elif name == "":
             raise ValueError("Name of task cannot be empty.")
         else:
