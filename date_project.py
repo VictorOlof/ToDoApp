@@ -1,8 +1,9 @@
 from date_task import DateTask
 from datetime import datetime
+from project_interface import ProjectInterface
 
 
-class DateProject:
+class DateProject(ProjectInterface):
     def __init__(self, task_list):
         self.task_list = task_list
 
@@ -13,7 +14,6 @@ class DateProject:
         return len(self.task_list)
 
     def add_task(self):
-        """Creates a DateTask obj and saves in task_list"""
         while True:
             name = input("Task name: ")
             date_str = input("Task date (dd-mm-yy): ")
@@ -23,18 +23,6 @@ class DateProject:
             except ValueError:
                 print("Invalid name or date. Try again.")
         self.task_list.append(task)
-
-    def mark_task(self):
-        while True:
-            selected_task_value = input("Select task: ")
-            try:
-                if selected_task_value == "0":
-                    raise IndexError
-                selected_task = self.task_list[int(selected_task_value) - 1]
-                selected_task.set_completed()
-                break
-            except (ValueError, IndexError):
-                print("Invalid choice.")
 
     def remove_task(self):
         """Removes DateTask obj from task_list"""
@@ -48,8 +36,19 @@ class DateProject:
             except (ValueError, IndexError):
                 print("Invalid choice.")
 
+    def mark_task(self):
+        while True:
+            selected_task_value = input("Select task: ")
+            try:
+                if selected_task_value == "0":
+                    raise IndexError
+                selected_task = self.task_list[int(selected_task_value) - 1]
+                selected_task.set_completed()
+                break
+            except (ValueError, IndexError):
+                print("Invalid choice.")
+
     def view_all_tasks(self, show_numbers=False):
-        """Views all tasks in task_list by date, with or without numbers"""
         # self.task_list.sort(key=lambda date: datetime.strptime(date.task_date, "%d-%m-%y"))
         for i, task in enumerate(self.task_list, start=1):
             if show_numbers:

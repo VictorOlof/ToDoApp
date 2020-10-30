@@ -1,7 +1,8 @@
 from task import Task
+from project_interface import ProjectInterface
 
 
-class Project:
+class Project(ProjectInterface):
     def __init__(self, name):
         self.name = name  # name of project
         self.task_list = []  # store all task objects
@@ -28,7 +29,6 @@ class Project:
             self._name = name.capitalize().strip()
 
     def add_task(self):
-        """Creates a Task obj and saves in task_list"""
         while True:
             name = input("Task name: ")
             try:
@@ -39,7 +39,6 @@ class Project:
         self.task_list.append(task)
 
     def remove_task(self):
-        """Removes Task obj from task_list"""
         while True:
             selected_task_value = input("Select task: ")
             try:
@@ -63,7 +62,6 @@ class Project:
                 print("Invalid choice.")
 
     def view_all_tasks(self, show_numbers=False):
-        """Views all tasks in task_list with or without numbers"""
         if self.task_list:
             for i, task in enumerate(self.task_list, start=1):
                 if show_numbers:
@@ -72,3 +70,4 @@ class Project:
                     print(f"{task.get_task()}")
         else:
             print(" -empty-")
+
