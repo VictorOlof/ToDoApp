@@ -1,4 +1,4 @@
-from task.task_project import ProjectTask
+from task.project_task import ProjectTask
 from datetime import datetime
 
 
