@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 
 
 class HabitTask(Task):
-    def __init__(self, name, repeat):
+    def __init__(self, name: str, repeat_day: int):
         super().__init__(name)
-        self.repeat = repeat
+        self.repeat = repeat_day  # Store habit day of the week 1..7
         self.days_completed = []
 
     def __repr__(self):
@@ -26,11 +26,11 @@ class HabitTask(Task):
 
     @property
     def task_date(self):
-        """ger datum till kommande weekday"""
+        """Return upcoming habit date"""
         return self.calc_next_habit_date(self._repeat).strftime("%d-%m-%y")
 
     @staticmethod
-    def calc_next_habit_date(repeat_day):
+    def calc_next_habit_date(repeat_day: int):
         """Calculates days left to the repeat day, returns calculated repeat date"""
         today = datetime.today()
         habit_date = datetime.today()
@@ -46,8 +46,7 @@ class HabitTask(Task):
         return habit_date
 
     def set_completed(self):
-        """Sets completed True->False or False->True
-        and adds or remove completed date to days_completed"""
+        """Adds or remove completed date_str to days_completed"""
         if datetime.today().strftime("%d-%m-%y") in self.days_completed:
             self.remove_day_completed(datetime.today())
         else:
@@ -67,6 +66,19 @@ class HabitTask(Task):
     def remove_day_completed(self, date):
         self.days_completed.remove(date.strftime("%d-%m-%y"))
 
+    @staticmethod
+    def get_day_str(repeat_number: int):
+        week = {
+            1: "Mon",
+            2: "Tue",
+            3: "Wen",
+            4: "Thu",
+            5: "Fri",
+            6: "Sat",
+            7: "Sun",
+        }
+        return week[repeat_number]
+
     def get_task(self):
         """Return the task information for user in readable format"""
-        return f"[{'x' if self.get_completed() else ' '}] {self.name} | [{self._repeat}] | {self.days_completed}"
+        return f"[{'x' if self.get_completed() else ' '}] {self.name} | [{self.get_day_str(self.repeat)}]"
