@@ -1,6 +1,6 @@
 from projectlist.task_project_list import TaskProjectList
-from date_project import DateProject
-from habit_project import HabitProject
+from project.date_project import DateProject
+from project.habit_project import HabitProject
 from os import system, name
 from datetime import datetime
 import pickle

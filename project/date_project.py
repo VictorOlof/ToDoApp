@@ -1,8 +1,9 @@
-from project_interface import ProjectInterface
-from habit_task import HabitTask
+from task.date_task import DateTask
+from datetime import datetime
+from project.project_interface import ProjectInterface
 
 
-class HabitProject(ProjectInterface):
+class DateProject(ProjectInterface):
     def __init__(self, task_list):
         self.task_list = task_list
 
@@ -15,12 +16,12 @@ class HabitProject(ProjectInterface):
     def add_task(self):
         while True:
             name = input("Task name: ")
-            rep_day = input("Repeat day (1-7): ")
+            date_str = input("Task date (dd-mm-yy): ")
             try:
-                task = HabitTask(name, rep_day)
+                task = DateTask(name, date_str)
                 break
             except ValueError:
-                print("Invalid name or repeat day. Try again.")
+                print("Invalid name or date. Try again.")
         self.task_list.append(task)
 
     def remove_task(self):
@@ -61,3 +62,12 @@ class HabitProject(ProjectInterface):
             for task in self.task_list:
                 if task.task_date == date_str:
                     print(task.get_task())
+
+    def view_missed_tasks(self):
+        """Print all uncompleted tasks from yesterday or older"""
+        if self.task_list:
+            for task in self.task_list:
+                if not task.completed:
+                    time = datetime.strptime(task.task_date, "%d-%m-%y")
+                    if (datetime.now() - time).days >= 1:
+                        print(f"{task.get_task()}")

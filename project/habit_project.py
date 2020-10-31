@@ -1,44 +1,30 @@
-from task import Task
-from project_interface import ProjectInterface
+from project.project_interface import ProjectInterface
+from task.habit_task import HabitTask
 
 
-class Project(ProjectInterface):
-    def __init__(self, name):
-        self.name = name  # name of project
-        self.task_list = []  # store all task objects
+class HabitProject(ProjectInterface):
+    def __init__(self, task_list):
+        self.task_list = task_list
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.name}, {self.task_list})"
+        return f"{self.__class__.__name__}({self.task_list})"
 
     def __len__(self):
         return len(self.task_list)
 
-    @property
-    def name(self):
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        if not isinstance(name, str):
-            raise TypeError("Name of project needs be type of str")
-        if len(name) > 25:
-            raise ValueError("Name of project cannot be longer than 25 characters")
-        elif name == "":
-            raise ValueError("Name of project cannot be empty.")
-        else:
-            self._name = name.capitalize().strip()
-
     def add_task(self):
         while True:
             name = input("Task name: ")
+            rep_day = input("Repeat day (1-7): ")
             try:
-                task = Task(name)
+                task = HabitTask(name, rep_day)
                 break
             except ValueError:
-                print("Invalid name. Try again.")
+                print("Invalid name or repeat day. Try again.")
         self.task_list.append(task)
 
     def remove_task(self):
+        """Removes DateTask obj from task_list"""
         while True:
             selected_task_value = input("Select task: ")
             try:
@@ -62,12 +48,16 @@ class Project(ProjectInterface):
                 print("Invalid choice.")
 
     def view_all_tasks(self, show_numbers=False):
-        if self.task_list:
-            for i, task in enumerate(self.task_list, start=1):
-                if show_numbers:
-                    print(f"{i}. {task.get_task()}")
-                else:
-                    print(f"{task.get_task()}")
-        else:
-            print(" -empty-")
+        # self.task_list.sort(key=lambda date: datetime.strptime(date.task_date, "%d-%m-%y"))
+        for i, task in enumerate(self.task_list, start=1):
+            if show_numbers:
+                print(f"{i}. {task.get_task()}")
+            else:
+                print(task.get_task())
 
+    def view_task_by_date(self, date_str):
+        """Views all tasks by date in string format dd-mm-yy"""
+        if self.task_list:
+            for task in self.task_list:
+                if task.task_date == date_str:
+                    print(task.get_task())

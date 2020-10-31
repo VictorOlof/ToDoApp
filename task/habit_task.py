@@ -1,4 +1,4 @@
-from task import Task
+from task.task import Task
 from datetime import datetime, timedelta
 
 
