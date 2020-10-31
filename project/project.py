@@ -1,4 +1,4 @@
-from task.task import Task
+from task.task_project import ProjectTask
 from project.project_interface import ProjectInterface
 
 
@@ -32,7 +32,7 @@ class Project(ProjectInterface):
         while True:
             name = input("Task name: ")
             try:
-                task = Task(name)
+                task = ProjectTask(name)
                 break
             except ValueError:
                 print("Invalid name. Try again.")

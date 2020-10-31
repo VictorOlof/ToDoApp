@@ -1,8 +1,8 @@
-from task.task import Task
+from task.task_project import ProjectTask
 from datetime import datetime, timedelta
 
 
-class HabitTask(Task):
+class HabitTask(ProjectTask):
     def __init__(self, name: str, repeat_day: int):
         super().__init__(name)
         self.repeat = repeat_day  # Store habit day of the week 1..7

@@ -1,4 +1,4 @@
-class Task:
+class ProjectTask:
     def __init__(self, name):
         self.name = name  # name of task
         self.completed = False  # if task is done
