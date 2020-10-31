@@ -24,7 +24,7 @@ def write_sequence_to_file(sequence: list, filename: str):
             pickle.dump(item, file)
 
 
-def read_sequence_from_file(filename) -> list:
+def read_sequence_from_file(filename: str) -> list:
     """Reads a sequence of items from file and returns in a list"""
     sequence = []
     try:
@@ -60,15 +60,12 @@ def menu_get_option(options: tuple):
 
 def main():
     # start of application
-    task_proj_list = TaskProjectList(project_lists=read_sequence_from_file("project_listinterface.dat"))
+    task_proj_list = TaskProjectList(project_lists=read_sequence_from_file("task_project_list.dat"))
     date_proj = DateProject(task_list=read_sequence_from_file("date_project.dat"))
     habit_proj = HabitProject(task_list=read_sequence_from_file("habit_project.dat"))
 
     while True:
         clear_window()
-        print(date_proj.task_list)
-        print(task_proj_list.project_lists)
-
         print("Projects:")
         task_proj_list.view_all_lists()
         print()
@@ -190,7 +187,7 @@ def main():
                     break
 
         # Save changes to file
-        write_sequence_to_file(task_proj_list.project_lists, "project_listinterface.dat")
+        write_sequence_to_file(task_proj_list.project_lists, "task_project_list.dat")
         write_sequence_to_file(date_proj.task_list, "date_project.dat")
         write_sequence_to_file(habit_proj.task_list, "habit_project.dat")
 
