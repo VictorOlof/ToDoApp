@@ -2,7 +2,7 @@ from task.task_project import ProjectTask
 from project.project_interface import ProjectInterface
 
 
-class Project(ProjectInterface):
+class TaskProject(ProjectInterface):
     def __init__(self, name):
         self.name = name  # name of project
         self.task_list = []  # store all task objects

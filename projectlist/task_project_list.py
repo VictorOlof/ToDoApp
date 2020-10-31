@@ -1,4 +1,4 @@
-from project.project import Project
+from project.task_project import TaskProject
 
 
 class TaskProjectList:
@@ -16,7 +16,7 @@ class TaskProjectList:
         while True:
             name = input("Enter project name: ")
             try:
-                project = Project(name)
+                project = TaskProject(name)
                 break
             except ValueError:
                 print("Invalid name. Try again.")
