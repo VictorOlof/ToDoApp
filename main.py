@@ -1,5 +1,6 @@
 from task_project_list import TaskProjectList
 from date_project import DateProject
+from habit_project import HabitProject
 from os import system, name
 from datetime import datetime
 import pickle
@@ -11,8 +12,7 @@ def clear_window():
     # for windows
     if name == 'nt':
         _ = system('cls')
-
-        # for mac and linux(here, os.name is 'posix')
+    # for mac and linux
     else:
         _ = system('clear')
 
@@ -41,11 +41,12 @@ def read_sequence_from_file(filename) -> list:
 
 
 def menu_view(options: tuple):
+    """Prints all items in a tuple with number"""
     for i, option in enumerate(options):
         print(f"{i + 1}. {options[i]}")
 
 
-def menu_get_option(options):
+def menu_get_option(options: tuple):
     while True:
         try:
             option = int(input("Select option: "))
@@ -60,7 +61,8 @@ def menu_get_option(options):
 def main():
     # start of application
     task_proj_list = TaskProjectList(project_lists=read_sequence_from_file("project_listinterface.dat"))
-    date_proj = DateProject(task_list=read_sequence_from_file("date_listinterface.dat"))
+    date_proj = DateProject(task_list=read_sequence_from_file("date_project.dat"))
+    habit_proj = HabitProject(task_list=read_sequence_from_file("habit_project.dat"))
 
     while True:
         clear_window()
@@ -76,12 +78,17 @@ def main():
         print("Missed tasks:")
         date_proj.view_missed_tasks()  # Displays tasks older than today
         print()
+        print("Habits for today:")
+        habit_proj.view_task_by_date(TODAY)
+        print()
 
         menu_options = (
             "Add project",
-            "Select project",
+            "Project options",
             "Add task by date",
-            "Select task with date"
+            "Date task options",
+            "Add habit",
+            "Habit options"
         )
         menu_view(menu_options)
         option = menu_get_option(menu_options)
@@ -155,9 +162,37 @@ def main():
                 elif option == 3:  # Leave menu
                     break
 
+        elif option == 5:  # Add habit
+            habit_proj.add_task()
+
+        elif option == 6:  # Select habit
+            while True:
+                clear_window()
+                print("All habits:")
+                habit_proj.view_all_tasks(show_numbers=True)
+                print()
+
+                menu_options = (
+                    "Mark task",
+                    "Remove Task",
+                    "Leave menu"
+                )
+                menu_view(menu_options)
+                option = menu_get_option(menu_options)
+
+                if option == 1:  # Mark task
+                    habit_proj.mark_task()
+
+                elif option == 2:  # Remove task
+                    habit_proj.remove_task()
+
+                elif option == 3:  # Leave menu
+                    break
+
         # Save changes to file
         write_sequence_to_file(task_proj_list.project_lists, "project_listinterface.dat")
-        write_sequence_to_file(date_proj.task_list, "date_listinterface.dat")
+        write_sequence_to_file(date_proj.task_list, "date_project.dat")
+        write_sequence_to_file(habit_proj.task_list, "habit_project.dat")
 
 
 if __name__ == '__main__':
