@@ -17,8 +17,8 @@ class HabitTask(ProjectTask):
 
     @repeat.setter
     def repeat(self, number):
-        if not number.isdigit():
-            raise ValueError("Repeat needs to be a digit")
+        if not isinstance(number, int):
+            raise ValueError("Repeat needs to be a digit of type int")
         elif 1 > int(number) > 7:
             raise ValueError("Repeat need to be in range 1..7")
         else:
