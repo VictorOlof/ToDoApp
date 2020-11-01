@@ -16,10 +16,10 @@ class ProjectTask:
             raise TypeError("Name of task needs be type of str")
         if len(name) > 25:
             raise ValueError("Name of task cannot be longer than 25 characters")
-        elif name == "":
+        elif len(name) == 0 or name.isspace():
             raise ValueError("Name of task cannot be empty.")
         else:
-            self._name = name.capitalize().strip()
+            self._name = name.strip().capitalize()
 
     def set_completed(self):
         """Sets completed True->False or False->True"""
