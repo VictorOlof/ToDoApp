@@ -17,9 +17,9 @@ class HabitProject(ProjectInterface):
             name = input("Task name: ")
             rep_day = input("Repeat day (1-7): ")
             try:
-                task = HabitTask(name, rep_day)
+                task = HabitTask(name, int(rep_day))
                 break
-            except ValueError:
+            except (ValueError, TypeError):
                 print("Invalid name or repeat day. Try again.")
         self.task_list.append(task)
 
