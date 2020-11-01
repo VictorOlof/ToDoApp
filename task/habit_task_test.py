@@ -22,6 +22,27 @@ class TestHabitTask(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.task_1.repeat = "3"
 
+    def test_name(self):
+        self.assertEqual(self.task_1.name, "Clean garden")
+
+        self.task_1.name = " empty trash  "
+        self.assertEqual(self.task_1.name, "Empty trash")
+
+        self.task_1.name = "EMPTY TRASH  "
+        self.assertEqual(self.task_1.name, "Empty trash")
+
+        with self.assertRaises(ValueError):
+            self.task_1.name = "   "
+
+        with self.assertRaises(ValueError):
+            self.task_1.name = ""
+
+        with self.assertRaises(ValueError):
+            self.task_1.name = "30charlong--------------------"
+
+        with self.assertRaises(TypeError):
+            self.task_1.name = ["name"]
+
 
 if __name__ == '__main__':
     unittest.main()
