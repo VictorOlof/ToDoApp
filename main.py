@@ -1,5 +1,5 @@
 from task_project_list import TaskProjectList
-from DateProject import DateProject
+from date_project import DateProject
 from os import system, name
 from datetime import datetime
 import pickle
