@@ -1,6 +1,24 @@
-Todo-App
+## Table of contents
+* [General info](#general-info)
+* [Screenshots](#screenshots)
+* [Technologies](#technologies)
+* [Features](#features)
+* [Setup](#setup)
 
-This app makes it easy for you to track things you need to do. The app launches as a console application but with focus to be easy navigated.
+## General info
+Console application to track things you need to do.
 
-You can create a project containing several subtasks, a task that needs to be done on a specific date or a task that occur once in a week.
-All tasks and projects will be stored locally on your computer. 
+## Screenshots
+Example
+![Alt text](/Screenshots/Example.png?raw=true "Example screenshot")
+
+UML Diagram
+![Alt text](/Screenshots/Example.png?raw=true "Example screenshot")
+
+## Technologies
+* Python 3.8
+
+## Features
+* Create a project containing several subtasks
+* Create a task that needs to be done on a specific date
+* Create a task that occur once in a week
