@@ -17,4 +17,4 @@ Example
 ![Alt text](/Screenshots/Example.png?raw=true "Example screenshot")
 
 UML Diagram
-![Alt text](/Screenshots/Example.png?raw=true "Example screenshot")
+![Alt text](/Screenshots/UML.png?raw=true "UML")
